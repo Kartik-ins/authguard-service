@@ -146,9 +146,12 @@ docker run -d \
 
 ## 6. API Reference
 
+> [!TIP]
+> All endpoints listen on port **`8080`** by default. If port `8080` is in use on your local development machine, you can override it by setting `PORT=8081` in your local `.env`.
+
 ### 1. Register User
 ```bash
-curl -X POST http://localhost:8081/api/auth/register \
+curl -X POST http://localhost:8080/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{"email":"user@example.com", "password":"securePassword123"}'
 ```
@@ -166,7 +169,7 @@ curl -X POST http://localhost:8081/api/auth/register \
 
 ### 2. Login
 ```bash
-curl -X POST http://localhost:8081/api/auth/login \
+curl -X POST http://localhost:8080/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"user@example.com", "password":"securePassword123"}'
 ```
@@ -184,7 +187,7 @@ curl -X POST http://localhost:8081/api/auth/login \
 
 ### 3. Access Protected Profile
 ```bash
-curl -X GET http://localhost:8081/api/test/profile \
+curl -X GET http://localhost:8080/api/test/profile \
   -H "Authorization: Bearer <YOUR_JWT_TOKEN>"
 ```
 
@@ -199,7 +202,7 @@ curl -X GET http://localhost:8081/api/test/profile \
 
 ### 4. Logout (Revoke Token)
 ```bash
-curl -X POST http://localhost:8081/api/auth/logout \
+curl -X POST http://localhost:8080/api/auth/logout \
   -H "Authorization: Bearer <YOUR_JWT_TOKEN>"
 ```
 

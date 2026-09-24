@@ -1,0 +1,32 @@
+services:
+  redis:
+    image: redis:alpine
+    container_name: authguard-redis
+    restart: unless-stopped
+    command: redis-server --maxmemory 64mb --maxmemory-policy allkeys-lru --save ""
+    ports:
+      - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          memory: 64M
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: authguard-service
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8080}:8080"
+    depends_on:
+      - redis
+    env_file:
+      - .env
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    deploy:
+      resources:
+        limits:
+          memory: 450M
