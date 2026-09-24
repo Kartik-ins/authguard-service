@@ -1,4 +1,20 @@
 services:
+  caddy:
+    image: caddy:alpine
+    container_name: authguard-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file:
+      - .env
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+
   redis:
     image: redis:alpine
     container_name: authguard-redis
@@ -30,3 +46,7 @@ services:
       resources:
         limits:
           memory: 450M
+
+volumes:
+  caddy_data:
+  caddy_config:
