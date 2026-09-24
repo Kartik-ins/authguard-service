@@ -144,7 +144,20 @@ docker run -d \
 
 ---
 
-## 6. API Reference
+## 6. Interactive Swagger / OpenAPI UI
+
+AuthGuard provides built-in interactive Swagger UI documentation with direct JWT Bearer token authorization:
+
+* **Live HTTPS Swagger UI**: `https://100.62.205.136.sslip.io/swagger-ui/index.html`
+* **Local Swagger UI**: `http://localhost:8080/swagger-ui/index.html` (or port `8081` if overridden)
+* **OpenAPI 3.0 Specification**: `/v3/api-docs`
+
+> [!TIP]
+> Click the green **Authorize 🔓** button in Swagger UI and enter your token to test the protected `/api/test/profile` and `/api/auth/logout` endpoints with rate limiting in real-time.
+
+---
+
+## 7. API Reference
 
 > [!TIP]
 > All endpoints listen on port **`8080`** by default. If port `8080` is in use on your local development machine, you can override it by setting `PORT=8081` in your local `.env`.
